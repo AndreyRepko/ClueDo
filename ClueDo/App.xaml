@@ -1,0 +1,26 @@
+﻿<Application x:Class="ClueDo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClueDo"
+             xmlns:converters="clr-namespace:ClueDo.WPF.Converters"
+             xmlns:gameSetup="clr-namespace:ClueDo.GameSetup"
+             xmlns:wpf="clr-namespace:ClueDo.WPF"
+             StartupUri="GameDebug.xaml">
+    <Application.Resources>
+        <local:GameDebugViewModel x:Key="GameDebugViewModel" />
+        
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter" />
+        
+        <DataTemplate DataType="{x:Type gameSetup:Setup}">
+            <wpf:SetupPresenter/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gameSetup:Player}">
+            <wpf:PlayerPresenter/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gameSetup:Cards}">
+            <wpf:CardsPresenter/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>

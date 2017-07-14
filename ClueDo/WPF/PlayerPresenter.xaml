@@ -11,7 +11,7 @@
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <Label>Name</Label>
-            <TextBlock Text ="{Binding Name}"/>
+            <TextBlock Text ="{Binding Name}" Style="{DynamicResource HighlightStyleBlock}"/>
         </StackPanel>
         <ContentControl Content ="{Binding Cards}"/>
         <ContentControl Content ="{Binding Knowledge}"/>

@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:ClueDo.WPF.Converters"
              xmlns:gameSetup="clr-namespace:ClueDo.GameSetup"
              xmlns:wpf="clr-namespace:ClueDo.WPF"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              StartupUri="GameDebug.xaml">
     <Application.Resources>
         <local:GameDebugViewModel x:Key="GameDebugViewModel" />
@@ -21,6 +22,5 @@
         <DataTemplate DataType="{x:Type gameSetup:Cards}">
             <wpf:CardsPresenter/>
         </DataTemplate>
-
     </Application.Resources>
 </Application>

@@ -9,11 +9,11 @@
              d:DesignHeight="30" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type=gameSetup:Setup, IsDesignTimeCreatable=False}">
     <StackPanel Orientation="Horizontal">
-        <Label Margin="5" Padding="3">Killer</Label>
-        <TextBox Text="{Binding Slayer, Mode=OneWay}" MinWidth="60" Margin="5" Padding="3"/>
-        <Label Margin="5" Padding="3">Weapon</Label>
-        <TextBox Text="{Binding Weapon, Mode=OneWay}" MinWidth="60" Margin="5" Padding="3"/>
-        <Label Margin="5" Padding="3">Crime scene</Label>
-        <TextBox Text="{Binding Place, Mode=OneWay}" MinWidth="60" Margin="5" Padding="3"/>        
+        <Label>Killer</Label>
+        <TextBox Text="{Binding Slayer, Mode=OneWay}" MinWidth="60"/>
+        <Label>Weapon</Label>
+        <TextBox Text="{Binding Weapon, Mode=OneWay}" MinWidth="60"/>
+        <Label>Crime scene</Label>
+        <TextBox Text="{Binding Place, Mode=OneWay}" MinWidth="60"/>        
     </StackPanel>
 </UserControl>

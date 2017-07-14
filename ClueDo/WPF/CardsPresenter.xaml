@@ -8,36 +8,44 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type=gameSetup:Cards, IsDesignTimeCreatable=True}">
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <Label>Crime scene</Label>
-            <ItemsControl ItemsSource="{Binding Places}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}" Margin="0,0,0,5"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Weapons</Label>
-            <ItemsControl ItemsSource="{Binding Weapons}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}" Margin="0,0,0,5"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Persons</Label>
-            <ItemsControl ItemsSource="{Binding Persons}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}" Margin="0,0,0,5"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>        
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Style="{DynamicResource HighlightStyleLabel}">Crime scene</Label>
+        <ItemsControl Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Places}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Label Grid.Column="0" Grid.Row="1" Style="{DynamicResource HighlightStyleLabel}">Weapons</Label>
+        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Weapons}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Label Grid.Column="0" Grid.Row="2" Style="{DynamicResource HighlightStyleLabel}">Persons</Label>
+        <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Persons}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </UserControl>

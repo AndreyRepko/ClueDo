@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 
 namespace ClueDo.GameSetup
@@ -67,6 +68,57 @@ namespace ClueDo.GameSetup
         public Place Place { get; }
         public Slayer Slayer { get; }
         public Weapon Weapon { get; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Setup))
+                return false;
+            var second = (Setup) obj;
+
+            return Place == second.Place && Slayer == second.Slayer && Weapon == second.Weapon;
+        }
+
+        protected bool Equals(Setup other)
+        {
+            return Place == other.Place && Slayer == other.Slayer && Weapon == other.Weapon;
+        }
+
+        public override string ToString()
+        {
+            return $"Place {Place}, Slayer {Slayer}, Weapon {Weapon}";
+        }
+
+        public static bool operator ==(Setup a, Setup b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Setup a, Setup b)
+        {
+            return !(a == b);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (int) Place;
+                hashCode = (hashCode * 397) ^ (int) Slayer;
+                hashCode = (hashCode * 397) ^ (int) Weapon;
+                return hashCode;
+            }
+        }
     }
 
     public class Cards
@@ -76,19 +128,21 @@ namespace ClueDo.GameSetup
         public List<Weapon> Weapons { get; } = new List<Weapon>();
     }
 
-    public class PlayerKnowledge
+    public class SingleCard : Cards
     {
-        public Setup[] AskedSetup { get; set; }
-        public Cards Cards { get; set; }
-        public Cards ShownToPlayerCards { get; set; }
-        public Setup[] CanHelpWith { get; set; }
-        public Setup[] NotPresent { get; set; }
-    }
+        public SingleCard(Place place)
+        {
+            Places.Add(place);
+        }
 
-    public class Player
-    {
-        public string Name { get; set; }
-        public Cards Cards { get; set; }
-        public Dictionary<Player, PlayerKnowledge> Knowledge { get; set; }
+        public SingleCard(Weapon weapon)
+        {
+            Weapons.Add(weapon);
+        }
+
+        public SingleCard(Slayer person)
+        {
+            Persons.Add(person);
+        }
     }
 }

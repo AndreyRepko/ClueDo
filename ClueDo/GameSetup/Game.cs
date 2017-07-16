@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ClueDo.GameSetup
 {
@@ -11,17 +12,68 @@ namespace ClueDo.GameSetup
 
         public void Initialize(int playersNumber)
         {
-            Players = new Player[playersNumber];
-            for(var i=0;i<playersNumber;i++)
-                Players[i] = new Player {Name = $"Player{i}"};
             var deck = new Deck();
             Murder = deck.GetMurderSetup();
             PublicCards = deck.GetKnownCards(GameConstants.GameCardsSetup[playersNumber].Key);
-            foreach (var player in Players)
+            Players = new Player[playersNumber];
+            var playerCardsNumber = GameConstants.GameCardsSetup[playersNumber].Value;
+            for (var i = 0; i < playersNumber; i++)
             {
-                player.Cards = deck.GetKnownCards(GameConstants.GameCardsSetup[playersNumber].Value);
+                Players[i] = new Player($"Player{i}", playersNumber, i,
+                    PublicCards, deck.GetKnownCards(playerCardsNumber),
+                    GameConstants.GameCardsSetup[playersNumber].Value)
+                {
+                    Strategy = new DumbStrategy()
+                };
             }
             deck.CheckNoCards();
+            CurrentPlayer = 0;
         }
+
+        public void DoNextTurn()
+        {
+            if (Charge()) return;
+
+            var askedSetup = Players[CurrentPlayer].AskSetup();
+            for (var i = CurrentPlayer+1;; i++)
+            {
+                if (i == Players.Length) i = 0;
+                if (i == CurrentPlayer)
+                {
+                    Array.ForEach(Players, p => p.RegisterWinSetup(askedSetup));
+                    Charge();
+                    break;
+                }
+
+                var help = Players[i].CanHelpWith(askedSetup, CurrentPlayer);
+
+                if (help == null)
+                {
+                    Array.ForEach(Players, p => p.RegisterNoHelp(askedSetup, i));
+                }
+                else
+                {
+                    Players[CurrentPlayer].RegisterHelp(askedSetup, help, i);
+                    foreach (var player in Players.Where(p => p != Players[CurrentPlayer]))
+                        player.RegisterHelpGiven(askedSetup, CurrentPlayer, i);
+                    break;
+                }
+            }
+            CurrentPlayer = (CurrentPlayer+1)% Players.Length;
+        }
+
+        private bool Charge()
+        {
+            var charge = Players[CurrentPlayer].AskForCharge();
+            if (charge != null)
+            {
+                if (Equals(charge, Murder))
+                    Winner = CurrentPlayer;
+                return true;
+            }
+            return false;
+        }
+
+        public int Winner { get; set; }
     }
 }

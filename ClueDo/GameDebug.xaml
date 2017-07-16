@@ -59,8 +59,8 @@
         </Grid>
         <StackPanel Orientation="Horizontal">
             <Button Command="{Binding StartGameCommand}" Visibility="{Binding Game, Converter={StaticResource NotNullToVisibilityConverter}}" Margin="5" Padding="3">Play the game</Button>
-            <Button Command="{Binding NextTurn}" Visibility="{Binding Game, Converter={StaticResource NullToVisibilityConverter}}" Margin="5" Padding="3">Next turn</Button>
-            <Button Command="{Binding FinishGame}" Visibility="{Binding Game, Converter={StaticResource NullToVisibilityConverter}}" Margin="5" Padding="3">Finish the game</Button>
+            <Button Command="{Binding NextTurnCommand}" Visibility="{Binding Game, Converter={StaticResource NullToVisibilityConverter}}" Margin="5" Padding="3">Next turn</Button>
+            <Button Command="{Binding FinishGameCommand}" Visibility="{Binding Game, Converter={StaticResource NullToVisibilityConverter}}" Margin="5" Padding="3">Finish the game</Button>
         </StackPanel>
     </StackPanel>
 </Window>

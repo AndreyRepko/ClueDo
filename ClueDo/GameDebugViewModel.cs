@@ -13,6 +13,8 @@ namespace ClueDo
         private Game _game;
 
         private RelayCommand _startGame;
+        private RelayCommand _nextTurn;
+
         public RelayCommand StartGameCommand
         {
             get
@@ -43,6 +45,11 @@ namespace ClueDo
             NotifyPropertyChanged(nameof(GameOpenCards));
         }
 
+        private void NextTurn()
+        {
+            _game.DoNextTurn();
+        }
+
         public int PlayersNumber
         {
             get { return _playersNumber; }
@@ -53,6 +60,14 @@ namespace ClueDo
                     _playersNumber = value;
                     NotifyPropertyChanged(nameof(PlayersNumber));
                 }
+            }
+        }
+
+        public RelayCommand NextTurnCommand
+        {
+            get
+            {
+                return _nextTurn = _nextTurn ?? (_nextTurn = new RelayCommand(NextTurn));
             }
         }
 

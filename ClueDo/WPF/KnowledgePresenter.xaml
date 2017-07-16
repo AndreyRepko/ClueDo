@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="ClueDo.WPF.KnowledgePresenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClueDo.WPF"
+             xmlns:gameSetup="clr-namespace:ClueDo.GameSetup"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=gameSetup:PlayerKnowledge, IsDesignTimeCreatable=False}">
+    <ContentControl Content="{Binding PotentialCards}"/>
+</UserControl>

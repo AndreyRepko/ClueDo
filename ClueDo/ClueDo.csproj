@@ -55,12 +55,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GameSetup\Deck.cs" />
+    <Compile Include="GameSetup\DumbStratagy.cs" />
     <Compile Include="GameSetup\GameConstants.cs" />
+    <Compile Include="GameSetup\Player.cs" />
+    <Compile Include="GameSetup\PlayerKnowledge.cs" />
+    <Compile Include="Utilities\Helpers.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="WPF\CardsPresenter.xaml.cs">
       <DependentUpon>CardsPresenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Converters\NullToVisivilityConverter.cs" />
+    <Compile Include="WPF\KnowledgePresenter.xaml.cs">
+      <DependentUpon>KnowledgePresenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\PlayerPresenter.xaml.cs">
       <DependentUpon>PlayerPresenter.xaml</DependentUpon>
     </Compile>
@@ -83,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WPF\CardsPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\KnowledgePresenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -126,6 +126,16 @@ namespace ClueDo.GameSetup
         public List<Place> Places { get; } = new List<Place>();
         public List<Slayer> Persons { get; } = new List<Slayer>();
         public List<Weapon> Weapons { get; } = new List<Weapon>();
+
+        public bool Any()
+        {
+            return Places.Any() || Persons.Any() || Weapons.Any();
+        }
+
+        public int Count()
+        {
+            return Places.Count + Persons.Count + Weapons.Count;
+        }
     }
 
     public class SingleCard : Cards

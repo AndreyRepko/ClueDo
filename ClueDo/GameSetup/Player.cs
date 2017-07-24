@@ -22,7 +22,7 @@ namespace ClueDo.GameSetup
             OwnCards = ownCards;
             PlayersNumber = playersNumber;
             NumberOfCards = numberOfCards;
-            Knowledge = new PlayerKnowledge(publicCards, ownCards);
+            Knowledge = new PlayerKnowledge(publicCards, ownCards, PlayersNumber, SelfNumber);
             NotifyPropertyChanged(nameof(Knowledge));
         }
 
@@ -61,12 +61,22 @@ namespace ClueDo.GameSetup
 
         public void RegisterHelp(Setup askedSetup, SingleCard help, int i)
         {
-            Knowledge.RegisterKnownCard(help);
+            Knowledge.RegisterKnownCard(help, i);
         }
 
         public void RegisterHelpGiven(Setup askedSetup, int askingPlayer, int i)
         {
             Knowledge.RegisterHelpedWithSetup(askedSetup, i);
+        }
+
+        public void RegisterAskedSetup(Setup askedSetup, int currentPlayer)
+        {
+            Knowledge.RegisterAskedSetup(askedSetup, currentPlayer);
+        }
+
+        public void DoDeduction()
+        {
+            Knowledge.DoDeduction();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

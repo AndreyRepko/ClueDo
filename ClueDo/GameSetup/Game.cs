@@ -35,6 +35,9 @@ namespace ClueDo.GameSetup
             if (Charge()) return;
 
             var askedSetup = Players[CurrentPlayer].AskSetup();
+
+            Array.ForEach(Players, p => p.RegisterAskedSetup(askedSetup, CurrentPlayer));
+
             for (var i = CurrentPlayer+1;; i++)
             {
                 if (i == Players.Length) i = 0;
@@ -59,6 +62,10 @@ namespace ClueDo.GameSetup
                     break;
                 }
             }
+            Array.ForEach(Players, p => p.DoDeduction());
+
+            Array.ForEach(Players, p1 => Array.ForEach(Players, p2 => KnowledgeSanityCheck.CheckWrongDeduction(p1.OwnCards, p1.SelfNumber, p2.Knowledge)));
+
             CurrentPlayer = (CurrentPlayer+1)% Players.Length;
         }
 
@@ -68,7 +75,10 @@ namespace ClueDo.GameSetup
             if (charge != null)
             {
                 if (Equals(charge, Murder))
+                {
                     Winner = CurrentPlayer;
+                    throw new Exception($"winner is {Winner}");
+                }
                 return true;
             }
             return false;
